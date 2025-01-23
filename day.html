@@ -11,42 +11,26 @@ function loadDayData() {
     const day = params.get('day') || 'desconocido';
     document.getElementById('day-title').innerText = `Disponibilidad para el Día ${day}`;
 
-    fetch(`data/court1.csv`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Error ${response.status}: ${response.statusText}`);
+   fetch(`data/court1.txt`)
+    .then(response => response.text())
+    .then(text => {
+        console.log("CSV cargado correctamente:", text);
+        let rows = text.trim().split("\\n");
+        let output = "";
+
+        rows.slice(1).forEach(row => {
+            let columns = row.split(",");
+            if (columns[0].trim() === day) {
+                output += `<p>${columns[1]} - ${columns[2] || 'Sin cliente'} - ${columns[3]}</p>`;
             }
-            return response.text();
-        })
-        .then(text => {
-            console.log("CSV cargado correctamente."); 
-            console.log("Contenido del CSV:", text);
-
-            let rows = text.trim().split("\\n");
-            let output = "";
-            let found = false;
-
-            rows.slice(1).forEach(row => {
-                let columns = row.split(",");
-                let csvDate = columns[0].trim();
-                console.log(`Comparando: ${csvDate} con ${day}`);
-
-                if (csvDate === day) {
-                    found = true;
-                    output += `<p>${columns[1]} - ${columns[2] || 'Sin cliente'} - ${columns[3]}</p>`;
-                }
-            });
-
-            if (!found) {
-                document.getElementById('availability').innerHTML = "<p>No hay datos disponibles para este día.</p>";
-            } else {
-                document.getElementById('availability').innerHTML = output;
-            }
-        })
-        .catch(error => {
-            console.error('Error cargando el archivo CSV:', error);
-            document.getElementById('availability').innerHTML = `<p>Error al cargar los datos.</p>`;
         });
+
+        document.getElementById('availability').innerHTML = output || "<p>No hay datos disponibles para este día.</p>";
+    })
+    .catch(error => {
+        console.error('Error cargando el archivo:', error);
+        document.getElementById('availability').innerHTML = `<p>Error al cargar los datos.</p>`;
+    });
 }
     </script>
 </head>
