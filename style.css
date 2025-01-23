@@ -5,13 +5,14 @@ body {
     text-align: center;
 }
 .container {
-    max-width: 1000px;
+    width: 100%;
+    max-width: 900px;
     margin: 0 auto;
     padding: 20px;
-    border: 2px solid #034f84;
+    text-align: center;
+    background-color: #f0fdf4;
     border-radius: 10px;
-    background-color: #ffffff;
-    text-aling: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 .available { color: green; }
 .unpaid { color: yellow; }
@@ -39,34 +40,22 @@ body {
     align-items: center; /* Centra los elementos verticalmente */
     max-width: 800px; /* Ajusta el ancho máximo */
     margin: auto; /* Centra en la página */
-.view-options {
-    text-align: center;
-    margin-bottom: 20px;
-}
 
-.view-options button {
-    margin: 5px;
-    padding: 10px 20px;
-    background-color: #034f84;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-}
 
 #calendar-view {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 10px;
 }
 
 .day, .hour {
     width: 150px;
-    height: 50px;
+    height: 100px;
     margin: 10px;
     border: 1px solid #034f84;
     text-align: center;
-    line-height: 50px;
+    line-height: 500px;
     cursor: pointer;
     background-color: #ffffff;
     transition: background-color 0.3s ease;
