@@ -12,35 +12,49 @@
             document.getElementById('day-title').innerText = `Disponibilidad para el Día ${day}`;
         }
 
-        function showCourt(court) {
-            const params = new URLSearchParams(window.location.search);
-            const day = params.get('day');
+function showCourt(court) {
+    const params = new URLSearchParams(window.location.search);
+    const day = params.get('day');
 
-            fetch(`data/${court}.txt`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`Error ${response.status}: ${response.statusText}`);
-                    }
-                    return response.text();
-                })
-                .then(text => {
-                    let rows = text.trim().split("\\n");
-                    let output = `<h2>Disponibilidad de ${court}</h2>`;
+    fetch(`data/${court}.txt`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error ${response.status}: ${response.statusText}`);
+            }
+            return response.text();
+        })
+        .then(text => {
+            let rows = text.trim().split("\\n");
+            let output = `<h2>Disponibilidad de ${court.replace('court', 'Cancha ')}</h2>`;
+            output += "<table border='1' style='width: 100%; text-align: center; border-collapse: collapse;'>";
+            output += "<tr><th>Hora</th><th>Cliente</th><th>Estado</th></tr>";
 
-                    rows.slice(1).forEach(row => {
-                        let columns = row.split(",");
-                        if (columns[0].trim() === day) {
-                            output += `<p>${columns[1]} - ${columns[2] || 'Sin cliente'} - ${columns[3]}</p>`;
-                        }
-                    });
+            let found = false;
+            rows.slice(1).forEach(row => {
+                let columns = row.split(",");
+                if (columns[0].trim() === day) {
+                    found = true;
+                    output += `<tr>
+                        <td>${columns[1]}</td>
+                        <td>${columns[2] || 'Sin cliente'}</td>
+                        <td style="color: ${columns[3].trim() === 'Libre' ? 'green' : 'red'}">${columns[3]}</td>
+                    </tr>`;
+                }
+            });
 
-                    document.getElementById('availability').innerHTML = output || `<p>No hay datos disponibles para esta cancha en este día.</p>`;
-                })
-                .catch(error => {
-                    console.error('Error cargando el archivo:', error);
-                    document.getElementById('availability').innerHTML = `<p>Error al cargar los datos.</p>`;
-                });
-        }
+            output += "</table>";
+
+            if (!found) {
+                document.getElementById('availability').innerHTML = `<p>No hay datos disponibles para esta cancha en este día.</p>`;
+            } else {
+                document.getElementById('availability').innerHTML = output;
+            }
+        })
+        .catch(error => {
+            console.error('Error cargando el archivo:', error);
+            document.getElementById('availability').innerHTML = `<p>Error al cargar los datos.</p>`;
+        });
+}
     </script>
 </head>
 <body onload="loadDayData()">
