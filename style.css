@@ -2,81 +2,28 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f0fdf4;
     color: #034f84;
-    text-align: center;
-}
-.container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-    background-color: #f0fdf4;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-.available { color: green; }
-.unpaid { color: yellow; }
-.paid { color: green; }
-.calendar {
+    margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
+    align-items: center;
+    min-height: 100vh;
 }
-.day {
-    width: 100px;
-    height: 100px;
-    margin: 5px;
-    text-align: center;
-    line-height: 100px;
-    border: 1px solid #034f84;
-    background-color: #fff;
-    cursor: pointer;
-}
-#calendar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center; /* Centra los elementos horizontalmente */
-    align-items: center; /* Centra los elementos verticalmente */
-    max-width: 800px; /* Ajusta el ancho máximo */
-    margin: auto; /* Centra en la página */
 
+.container {
+    width: 90%;
+    max-width: 1200px;
+    text-align: center;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
 
 #calendar-view {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    max-width: 800px; /* Ajusta el ancho máximo */
-    margin: 0 auto; /* Centra el contenedor */
-}
-
-.day, .hour {
-    width: 150px;
-    height: 100px;
-    margin: 10px;
-    border: 1px solid #034f84;
-    text-align: center;
-    line-height: 500px;
-    cursor: pointer;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
-}
-
-.day:hover, .hour:hover {
-    background-color: #e0f7fa;
-    transform: scale(1.05);
-}
-
-.court {
-    border: 1px solid #034f84;
-    padding: 15px;
-    margin-bottom: 10px;
-    background-color: #f0fdf4;
-}
-h1 {
-    text-align: center;
-    font-size: 28px;
-    color: #034f84;
-    margin-bottom: 30px;
-}
+    displ
