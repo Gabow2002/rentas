@@ -1,0 +1,29 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0fdf4;
+    color: #034f84;
+    text-align: center;
+}
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+    border: 2px solid #034f84;
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+.available { color: green; }
+.unpaid { color: yellow; }
+.paid { color: green; }
+.calendar {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.day {
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+    text-align: center;
+    border: 1px solid #034f84;
+}

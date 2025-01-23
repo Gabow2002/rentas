@@ -1,4 +1,0 @@
-[
-    {"court": "1", "time": "08:00", "client": "Juan Pérez", "paid": true},
-    {"court": "2", "time": "09:00", "client": "Ana López", "paid": false}
-]
