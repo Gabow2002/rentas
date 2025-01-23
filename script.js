@@ -29,14 +29,5 @@ function showWeekView() {
 }
 
 function showDayView() {
-    const calendar = document.getElementById("calendar-view");
-    calendar.innerHTML = "";
-
-    for (let i = 6; i <= 22; i++) {
-        let hourElement = document.createElement("div");
-        hourElement.className = "hour";
-        hourElement.innerText = `${i}:00 - ${i + 1}:00`;
-        hourElement.onclick = () => alert(`Disponibilidad de ${i}:00`);
-        calendar.appendChild(hourElement);
-    }
+    window.location.href = "day.html";
 }
