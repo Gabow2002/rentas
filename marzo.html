@@ -3,14 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Disponibilidad - Marzo</title>
+    <title>Disponibilidad - Enero</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
 <body>
     <div class="container">
-        <h1>Disponibilidad de Marzo</h1>
-        <div id="calendar-view" data-month="3"></div>
+        <h1>Disponibilidad de Enero</h1>
+        <div id="calendar-view" data-month="1"></div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const calendar = document.getElementById("calendar-view");
+            for (let i = 1; i <= 31; i++) {
+                let dayElement = document.createElement("div");
+                dayElement.className = "day";
+                dayElement.innerText = `Marzo ${i.toString().padStart(2, '0')}`;
+                dayElement.onclick = () => window.location.href = `day.html?day=2025-01-${i.toString().padStart(2, '0')}`;
+                calendar.appendChild(dayElement);
+            }
+        });
+    </script>
 </body>
 </html>
