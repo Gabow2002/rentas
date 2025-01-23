@@ -3,26 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Disponibilidad - Enero</title>
+    <title>Disponibilidad - Febrero</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
-</head>
-<body>
-    <div class="container">
-        <h1>Disponibilidad de Enero</h1>
-        <div id="calendar-view" data-month="1"></div>
-    </div>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const calendar = document.getElementById("calendar-view");
-            for (let i = 1; i <= 28; i++) {
+            const month = "Febrero";
+            const monthNumber = 2; // Febrero
+            for (let i = 1; i <= 28; i++) { // Cambiar a 29 en año bisiesto
                 let dayElement = document.createElement("div");
                 dayElement.className = "day";
-                dayElement.innerText = `Febrero ${i.toString().padStart(2, '0')}`;
-                dayElement.onclick = () => window.location.href = `day.html?day=2025-01-${i.toString().padStart(2, '0')}`;
+                dayElement.innerText = `${month} ${i.toString().padStart(2, '0')}`;
+                dayElement.onclick = () => window.location.href = `day.html?day=2025-${monthNumber.toString().padStart(2, '0')}-${i.toString().padStart(2, '0')}`;
                 calendar.appendChild(dayElement);
             }
         });
     </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Disponibilidad de Febrero</h1>
+        <div id="calendar-view"></div>
+    </div>
 </body>
 </html>
