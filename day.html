@@ -11,6 +11,8 @@ function loadDayData() {
     const day = params.get('day') || 'desconocido';
     document.getElementById('day-title').innerText = `Disponibilidad para el Día ${day}`;
 
+    console.log("Cargando datos para:", day);  // Verificar si la fecha se está leyendo correctamente
+
     fetch(`data/court1.csv`)
         .then(response => {
             if (!response.ok) {
@@ -19,20 +21,21 @@ function loadDayData() {
             return response.text();
         })
         .then(text => {
-            console.log("CSV Cargado correctamente"); // Depuración
-            console.log(text); // Ver contenido del CSV
+            console.log("CSV cargado correctamente"); // Depuración
+            console.log("Contenido del CSV:", text);
 
             let rows = text.trim().split("\\n");
-            let headers = rows[0].split(",");
-            let dataRows = rows.slice(1);
+            if (rows.length <= 1) {
+                document.getElementById('availability').innerHTML = "<p>No hay datos disponibles para este día.</p>";
+                return;
+            }
 
             let output = "";
-
-            dataRows.forEach(row => {
+            rows.slice(1).forEach(row => {
                 let columns = row.split(",");
-                console.log(columns); // Depurar columnas para verificar formato
+                console.log("Fila procesada:", columns); // Verificar contenido de cada fila
 
-                if (columns[0] === day) { 
+                if (columns[0].trim() === day) {
                     output += `<p>${columns[1]} - ${columns[2] || 'Sin cliente'} - ${columns[3]}</p>`;
                 }
             });
