@@ -26,4 +26,28 @@ h1 {
 }
 
 #calendar-view {
-    displ
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    justify-content: center;
+}
+
+.day {
+    width: 150px;
+    height: 100px;
+    border: 1px solid #034f84;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #ffffff;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.day:hover {
+    background-color: #e0f7fa;
+    transform: scale(1.05);
+}
