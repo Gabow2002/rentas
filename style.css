@@ -34,6 +34,7 @@ body {
 #calendar {
     display: flex;
     flex-wrap: wrap;
+    gap: 10px;
     justify-content: center; /* Centra los elementos horizontalmente */
     align-items: center; /* Centra los elementos verticalmente */
     max-width: 800px; /* Ajusta el ancho máximo */
