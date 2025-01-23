@@ -123,3 +123,17 @@ button:hover {
 .month-buttons button:hover {
     background-color: #023d63;
 }
+.status-libre {
+    color: green;
+    font-weight: bold;
+}
+
+.status-pagada {
+    color: blue;
+    font-weight: bold;
+}
+
+.status-pendiente {
+    color: orange;
+    font-weight: bold;
+}
