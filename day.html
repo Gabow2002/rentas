@@ -16,6 +16,8 @@ function showCourt(court) {
     const params = new URLSearchParams(window.location.search);
     const day = params.get('day');
 
+    console.log(`Cargando datos para la cancha: ${court}, Día: ${day}`);
+
     fetch(`data/${court}.txt`)
         .then(response => {
             if (!response.ok) {
@@ -24,7 +26,10 @@ function showCourt(court) {
             return response.text();
         })
         .then(text => {
-            let rows = text.trim().split("\\n");
+            console.log("Contenido del archivo cargado:");
+            console.log(text);
+
+            let rows = text.trim().split("\n");
             let output = `<h2>Disponibilidad de ${court.replace('court', 'Cancha ')}</h2>`;
             output += "<table border='1' style='width: 100%; text-align: center; border-collapse: collapse;'>";
             output += "<tr><th>Hora</th><th>Cliente</th><th>Estado</th></tr>";
@@ -32,12 +37,14 @@ function showCourt(court) {
             let found = false;
             rows.slice(1).forEach(row => {
                 let columns = row.split(",");
-                if (columns[0].trim() === day) {
+                console.log(`Fila procesada: ${columns}`);
+
+                if (columns.length >= 4 && columns[0].trim() === day) {
                     found = true;
                     output += `<tr>
-                        <td>${columns[1]}</td>
-                        <td>${columns[2] || 'Sin cliente'}</td>
-                        <td style="color: ${columns[3].trim() === 'Libre' ? 'green' : 'red'}">${columns[3]}</td>
+                        <td>${columns[1].trim()}</td>
+                        <td>${columns[2] ? columns[2].trim() : 'Sin cliente'}</td>
+                        <td style="color: ${columns[3].trim() === 'Libre' ? 'green' : 'red'}">${columns[3].trim()}</td>
                     </tr>`;
                 }
             });
