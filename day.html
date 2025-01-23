@@ -12,17 +12,31 @@
             document.getElementById('day-title').innerText = `Disponibilidad para el Día ${day}`;
 
             fetch(`data/court1.csv`)
-                .then(response => response.text())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Error al cargar CSV: ${response.statusText}`);
+                    }
+                    return response.text();
+                })
                 .then(text => {
-                    let rows = text.trim().split("\\n").slice(1); // Elimina encabezado
+                    let rows = text.trim().split("\\n").slice(1); // Omitir la primera línea (encabezado)
                     let output = "";
-                    rows.forEach(row => {
-                        let columns = row.split(\",\");
-                        output += `<p>${columns[0]} - ${columns[1]} - ${columns[2]} - ${columns[3]}</p>`;
-                    });
+
+                    if (rows.length === 0) {
+                        output = "<p>No hay datos disponibles para este día.</p>";
+                    } else {
+                        rows.forEach(row => {
+                            let columns = row.split(",");
+                            output += `<p>${columns[0]} - ${columns[1]} - ${columns[2]} - ${columns[3]}</p>`;
+                        });
+                    }
+                    
                     document.getElementById('availability').innerHTML = output;
                 })
-                .catch(error => console.error('Error cargando el archivo CSV:', error));
+                .catch(error => {
+                    console.error('Error cargando el archivo CSV:', error);
+                    document.getElementById('availability').innerHTML = `<p>Error al cargar los datos.</p>`;
+                });
         }
     </script>
 </head>
