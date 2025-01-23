@@ -381,7 +381,7 @@ Fecha,Hora,Cliente,Estado
 2025-01-23,11:00,,Libre
 2025-01-23,12:00,,Libre
 2025-01-23,13:00,,Libre
-2025-01-23,14:00,,Libre
+2025-01-23,14:00,Gabo,pendiente
 2025-01-23,15:00,clinica,pagada
 2025-01-23,16:00,clinica,pagada
 2025-01-23,17:00,clinica,pagada
