@@ -4,11 +4,12 @@ document.addEventListener("DOMContentLoaded", () => {
     for (let i = 0; i < 31; i++) {
         let currentDate = new Date(startDate);
         currentDate.setDate(startDate.getDate() + i);
+        let formattedDate = currentDate.toISOString().split('T')[0];
 
         let dayElement = document.createElement("div");
         dayElement.className = "day";
         dayElement.innerText = `${currentDate.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric' })}`;
-        dayElement.onclick = () => window.location.href = `day.html?day=${currentDate.getDate()}`;
+        dayElement.onclick = () => window.location.href = `day.html?day=${formattedDate}`;
         calendar.appendChild(dayElement);
     }
 });
