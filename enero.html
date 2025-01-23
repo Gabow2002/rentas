@@ -5,12 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Disponibilidad - Enero</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const calendar = document.getElementById("calendar-view");
+            const month = "Enero";
+            const monthNumber = 1; // Enero
+            for (let i = 1; i <= 31; i++) {
+                let dayElement = document.createElement("div");
+                dayElement.className = "day";
+                dayElement.innerText = `${month} ${i.toString().padStart(2, '0')}`;
+                dayElement.onclick = () => window.location.href = `day.html?day=2025-${monthNumber.toString().padStart(2, '0')}-${i.toString().padStart(2, '0')}`;
+                calendar.appendChild(dayElement);
+            }
+        });
+    </script>
 </head>
 <body>
     <div class="container">
         <h1>Disponibilidad de Enero</h1>
-        <div id="calendar-view" data-month="1"></div>
+        <div id="calendar-view"></div>
     </div>
 </body>
 </html>
