@@ -8,26 +8,15 @@
     <script>
         function loadDayData() {
             const params = new URLSearchParams(window.location.search);
-            const day = params.get('day');
+            const day = params.get('day') || 'desconocido';
             document.getElementById('day-title').innerText = `Disponibilidad para el Día ${day}`;
         }
     </script>
 </head>
 <body onload="loadDayData()">
     <div class="container">
-        <h1 id="day-title"></h1>
-        <div class="court">
-            <h2>Cancha 1</h2>
-            <p>06:00 - Libre</p>
-            <p>07:00 - Reservada</p>
-            <p>08:00 - Libre</p>
-        </div>
-        <div class="court">
-            <h2>Cancha 2</h2>
-            <p>06:00 - Libre</p>
-            <p>07:00 - Libre</p>
-            <p>08:00 - Libre</p>
-        </div>
+        <h1 id="day-title">Disponibilidad</h1>
+        <p>Información de la disponibilidad por horas aquí...</p>
     </div>
 </body>
 </html>
