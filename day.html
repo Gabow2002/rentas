@@ -10,24 +10,26 @@
             const params = new URLSearchParams(window.location.search);
             const day = params.get('day') || 'desconocido';
             document.getElementById('day-title').innerText = `Disponibilidad para el Día ${day}`;
+
             fetch(`data/court1.csv`)
                 .then(response => response.text())
                 .then(text => {
-                    let rows = text.split("\n");
+                    let rows = text.trim().split("\\n").slice(1); // Elimina encabezado
                     let output = "";
                     rows.forEach(row => {
-                        let columns = row.split(",");
+                        let columns = row.split(\",\");
                         output += `<p>${columns[0]} - ${columns[1]} - ${columns[2]} - ${columns[3]}</p>`;
                     });
                     document.getElementById('availability').innerHTML = output;
-                });
+                })
+                .catch(error => console.error('Error cargando el archivo CSV:', error));
         }
     </script>
 </head>
 <body onload="loadDayData()">
     <div class="container">
-        <h1 id="day-title"></h1>
-        <div id="availability"></div>
+        <h1 id="day-title">Disponibilidad</h1>
+        <div id="availability">Cargando...</div>
     </div>
 </body>
 </html>
