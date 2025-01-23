@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disponibilidad del Día</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function loadDayData() {
+            const params = new URLSearchParams(window.location.search);
+            const day = params.get('day');
+            document.getElementById('day-title').innerText = `Disponibilidad para el Día ${day}`;
+        }
+    </script>
+</head>
+<body onload="loadDayData()">
+    <div class="container">
+        <h1 id="day-title"></h1>
+        <div class="court">
+            <h2>Cancha 1</h2>
+            <p>06:00 - Libre</p>
+            <p>07:00 - Reservada</p>
+            <p>08:00 - Libre</p>
+        </div>
+        <div class="court">
+            <h2>Cancha 2</h2>
+            <p>06:00 - Libre</p>
+            <p>07:00 - Libre</p>
+            <p>08:00 - Libre</p>
+        </div>
+    </div>
+</body>
+</html>
