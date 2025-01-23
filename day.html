@@ -6,38 +6,48 @@
     <title>Disponibilidad del Día</title>
     <link rel="stylesheet" href="style.css">
     <script>
-        function loadDayData() {
-            const params = new URLSearchParams(window.location.search);
-            const day = params.get('day') || 'desconocido';
-            document.getElementById('day-title').innerText = `Disponibilidad para el Día ${day}`;
+function loadDayData() {
+    const params = new URLSearchParams(window.location.search);
+    const day = params.get('day') || 'desconocido';
+    document.getElementById('day-title').innerText = `Disponibilidad para el Día ${day}`;
 
-            fetch(`data/court1.csv`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`Error al cargar CSV: ${response.statusText}`);
-                    }
-                    return response.text();
-                })
-                .then(text => {
-                    let rows = text.trim().split("\\n").slice(1); // Omitir la primera línea (encabezado)
-                    let output = "";
+    fetch(`data/court1.csv`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error ${response.status}: ${response.statusText}`);
+            }
+            return response.text();
+        })
+        .then(text => {
+            console.log("CSV Cargado correctamente"); // Depuración
+            console.log(text); // Ver contenido del CSV
 
-                    if (rows.length === 0) {
-                        output = "<p>No hay datos disponibles para este día.</p>";
-                    } else {
-                        rows.forEach(row => {
-                            let columns = row.split(",");
-                            output += `<p>${columns[0]} - ${columns[1]} - ${columns[2]} - ${columns[3]}</p>`;
-                        });
-                    }
-                    
-                    document.getElementById('availability').innerHTML = output;
-                })
-                .catch(error => {
-                    console.error('Error cargando el archivo CSV:', error);
-                    document.getElementById('availability').innerHTML = `<p>Error al cargar los datos.</p>`;
-                });
-        }
+            let rows = text.trim().split("\\n");
+            let headers = rows[0].split(",");
+            let dataRows = rows.slice(1);
+
+            let output = "";
+
+            dataRows.forEach(row => {
+                let columns = row.split(",");
+                console.log(columns); // Depurar columnas para verificar formato
+
+                if (columns[0] === day) { 
+                    output += `<p>${columns[1]} - ${columns[2] || 'Sin cliente'} - ${columns[3]}</p>`;
+                }
+            });
+
+            if (output === "") {
+                document.getElementById('availability').innerHTML = "<p>No hay datos disponibles para este día.</p>";
+            } else {
+                document.getElementById('availability').innerHTML = output;
+            }
+        })
+        .catch(error => {
+            console.error('Error cargando el archivo CSV:', error);
+            document.getElementById('availability').innerHTML = `<p>Error al cargar los datos.</p>`;
+        });
+}
     </script>
 </head>
 <body onload="loadDayData()">
